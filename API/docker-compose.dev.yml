@@ -1,0 +1,21 @@
+version: "3.4"
+
+services:
+  api:
+    image: node-api
+    build:
+      context: .
+      dockerfile: .docker/dev.dockerfile
+    environment:
+      PORT: 8080
+      MONGO_URL: mongodb:27017
+      NODE_ENV: development
+    ports:
+      - "8080:8080"
+    links:
+      - database
+  
+  database:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
