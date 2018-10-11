@@ -1,4 +1,4 @@
-FROM node:latest
+FROM node:8.12.0-alpine
 
 LABEL author="Saurabh Palatkar"
 
