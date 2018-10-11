@@ -2,6 +2,7 @@ version: '3.4'
 
 services:
   angular-nginx-docker:
+    container_name: ng-docker-dev
     image: ng-docker-dev
     build: 
       context: .
