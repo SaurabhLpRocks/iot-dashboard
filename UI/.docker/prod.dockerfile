@@ -2,7 +2,7 @@
 # Using the above image allows us toskip the angular-cli install
 
 # If you want to build the Angular project inside the docker, then uncomment following sectioin:
-FROM node:latest as angular-built
+FROM node:8.12.0-alpine as angular-built
 WORKDIR /usr/src/app
 RUN npm i -g @angular/cli
 COPY package.json package.json
