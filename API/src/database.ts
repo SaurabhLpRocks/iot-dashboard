@@ -1,8 +1,10 @@
 import * as Mongoose from "mongoose";
-import { IDataConfiguration } from "./configurations";
+
 import { ILogging, LoggingModel } from "./plugins/logging/logging";
-import { IUser, UserModel } from "./api/users/user";
 import { ITask, TaskModel } from "./api/tasks/task";
+import { IUser, UserModel } from "./api/users/user";
+
+import { IDataConfiguration } from "./configurations";
 
 export interface IDatabase {
   loggingModel: Mongoose.Model<ILogging>;

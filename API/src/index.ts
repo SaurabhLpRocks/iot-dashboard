@@ -1,6 +1,6 @@
-import * as Server from "./server";
-import * as Database from "./database";
 import * as Configs from "./configurations";
+import * as Database from "./database";
+import * as Server from "./server";
 
 console.log(`Running enviroment ${process.env.NODE_ENV || "dev"}`);
 
