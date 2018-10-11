@@ -20,6 +20,6 @@ services:
   
   database:
     container_name: database
-    image: mongo:latest
+    image: mongo:4.0.3
     ports:
       - "27017:27017"
