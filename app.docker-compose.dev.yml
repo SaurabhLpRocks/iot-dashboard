@@ -4,20 +4,19 @@ services:
   angular-nginx-docker:
     container_name: ng-docker-dev
     image: ng-docker-dev
-    build: 
+    build:
       context: UI
       dockerfile: .docker/dev.dockerfile
     environment:
       NODE_ENV: development
-    volumes: 
-      # Uncomment following for Linux/Mac
-      - "/dist:/usr/share/nginx/html"
-      # Uncomment following for Windows
-      # - "./dist:/usr/share/nginx/html"
+    volumes:
+      - "./UI:/usr/share/app"
+      - /app/node_modules/
     ports:
       - 4200:80
     ## set your startup file here
-    command: [nginx-debug, '-g', 'daemon off;']
+    # command: ["ng serve --host=0.0.0.0 --watch --poll=2000"]
+    command: ["sh", "-c", "npm rebuild node-sass --force && ng serve --host=0.0.0.0 --watch --poll=2000"]
   api:
     container_name: node-api
     image: node-api
@@ -34,7 +33,7 @@ services:
       - database
     depends_on:
       - database
-  
+
   database:
     container_name: database
     image: mongo:4.0.3
