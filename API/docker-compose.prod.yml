@@ -17,9 +17,10 @@ services:
       - database
     depends_on:
       - database
+    command: ["npm", "start"]
   
   database:
-    container_name: database-prod
+    container_name: database-prod-container
     image: mongo:4.0.3
     ports:
       - "27017:27017"
