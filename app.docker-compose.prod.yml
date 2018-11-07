@@ -1,0 +1,39 @@
+version: "3.4"
+
+services:
+  angular-nginx-docker:
+    container_name: ng-docker-prod-container
+    image: ng-docker-prod-image
+    build:
+      context: UI
+      dockerfile: .docker/prod.dockerfile
+    environment:
+      NODE_ENV: production
+    volumes:
+      - "./UI:/usr/share/app"
+      - /app/node_modules/
+    ports:
+      - 80:80
+    command: [nginx, '-g', 'daemon off;']
+  api:
+    container_name: node-api-prod-container
+    image: node-api-prod-image
+    build:
+      context: API
+      dockerfile: .docker/prod.dockerfile
+    environment:
+      PORT: 3000
+      MONGO_URL: mongodb://database:27017
+      NODE_ENV: prod
+    ports:
+      - "3000:3000"
+    links:
+      - database
+    depends_on:
+      - database
+
+  database:
+    container_name: database
+    image: mongo:4.0.3
+    ports:
+      - "27017:27017"

@@ -2,8 +2,8 @@ version: "3.4"
 
 services:
   angular-nginx-docker:
-    container_name: ng-docker-dev
-    image: ng-docker-dev
+    container_name: ng-docker-dev-container
+    image: ng-docker-dev-image
     build:
       context: UI
       dockerfile: .docker/dev.dockerfile
@@ -18,8 +18,8 @@ services:
     # command: ["ng serve --host=0.0.0.0 --watch --poll=2000"]
     command: ["sh", "-c", "npm rebuild node-sass --force && ng serve --host=0.0.0.0 --watch --poll=2000"]
   api:
-    container_name: node-api
-    image: node-api
+    container_name: node-api-dev-container
+    image: node-api-dev-image
     build:
       context: API
       dockerfile: .docker/dev.dockerfile
@@ -35,7 +35,7 @@ services:
       - database
 
   database:
-    container_name: database
+    container_name: database-dev
     image: mongo:4.0.3
     ports:
       - "27017:27017"

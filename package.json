@@ -5,7 +5,9 @@
   "main": "",
   "scripts": {
     "start": "npm run compose:docker:dev",
-    "compose:docker:dev": "docker-compose -f app.docker-compose.dev.yml up -d --build",
+    "start:prod": "npm run compose:docker:prod",
+    "compose:docker:dev": "docker-compose -f app.docker-compose.dev.yml up --build",
+    "compose:docker:prod": "docker-compose -f app.docker-compose.prod.yml up -d --build",
     "setup:and:start": "npm run setup && npm run start",
     "setup": "npm i && concurrently \"npm run install:API:dependencies\" \"npm run install:UI:dependencies\"",
     "install:API:dependencies": "cd API && npm i",
