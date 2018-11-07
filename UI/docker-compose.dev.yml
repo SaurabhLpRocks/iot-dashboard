@@ -6,7 +6,7 @@ services:
     image: ng-docker-dev
     build: 
       context: .
-      dockerfile: .docker/dev.dockerfile
+      dockerfile: dev.dockerfile
     environment:
       NODE_ENV: development
     volumes: 

@@ -6,7 +6,7 @@ services:
     image: ng-docker-prod-image
     build: 
       context: .
-      dockerfile: .docker/prod.dockerfile
+      dockerfile: prod.dockerfile
     environment:
       NODE_ENV: production
     ports:
