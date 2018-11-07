@@ -11,10 +11,9 @@ services:
   node-api:
     image: saurabhpalatkar/iot-dashboard-api
     environment:
-      NODE_ENV: production
+      NODE_ENV: prod
       PORT: 3000
       MONGO_URL: mongodb://database:27017
-      NODE_ENV: prod
     ports:
       - 3000:3000
     links:
