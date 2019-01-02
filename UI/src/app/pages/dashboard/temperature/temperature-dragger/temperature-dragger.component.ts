@@ -22,8 +22,7 @@ export class TemperatureDraggerComponent implements AfterViewInit, OnChanges {
   @Input() maxLeap = 0.4;
 
   value = 50;
-  // tslint:disable-next-line:no-output-rename
-  @Output('valueChange') valueChange = new EventEmitter<Number>();
+  @Output() valueChange = new EventEmitter<Number>();
   @Input('value') set setValue(value) {
     this.value = value;
   }

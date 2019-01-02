@@ -10,4 +10,7 @@
 
 export const environment = {
   production: false,
+  env: 'dev',
+  apiHost: 'http://localhost:52953/',
+  // apiHost: 'http://137.116.150.141/recrukit-qa/',
 };

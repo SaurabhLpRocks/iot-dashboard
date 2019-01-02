@@ -5,4 +5,6 @@
  */
 export const environment = {
   production: true,
+  env: 'stage',
+  apiHost: 'http://iot-dashboard.azurewebsites.net/api/',
 };

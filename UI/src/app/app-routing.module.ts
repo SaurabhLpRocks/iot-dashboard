@@ -1,5 +1,4 @@
 import { ExtraOptions, RouterModule, Routes } from '@angular/router';
-import { NgModule } from '@angular/core';
 import {
   NbAuthComponent,
   NbLoginComponent,
@@ -8,6 +7,8 @@ import {
   NbRequestPasswordComponent,
   NbResetPasswordComponent,
 } from '@nebular/auth';
+
+import { NgModule } from '@angular/core';
 
 const routes: Routes = [
   { path: 'pages', loadChildren: 'app/pages/pages.module#PagesModule' },
@@ -41,7 +42,7 @@ const routes: Routes = [
       },
     ],
   },
-  { path: '', redirectTo: 'pages', pathMatch: 'full' },
+  { path: '', redirectTo: 'pages', pathMatch: 'full'},
   { path: '**', redirectTo: 'pages' },
 ];
 

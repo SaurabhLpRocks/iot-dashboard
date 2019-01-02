@@ -1,10 +1,11 @@
 import * as Hapi from "hapi";
 import * as Joi from "joi";
-import TaskController from "./task-controller";
 import * as TaskValidator from "./task-validator";
-import { jwtValidator } from "../users/user-validator";
+
 import { IDatabase } from "../../database";
 import { IServerConfigurations } from "../../configurations";
+import TaskController from "./task-controller";
+import { jwtValidator } from "../users/user-validator";
 
 export default function (
   server: Hapi.Server,

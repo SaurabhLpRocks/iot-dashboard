@@ -9,15 +9,14 @@
     "experimentalDecorators": true,
     "target": "es5",
     "typeRoots": [
-      "node_modules/@types",
-      "@types"
+      "node_modules/@types"
     ],
     "lib": [
       "es2017",
       "dom"
     ],
     "plugins": [
-      { "name": "typescript-tslint-plugin"}
+      { "name": "tslint-language-service"}
     ]
   }
 }
