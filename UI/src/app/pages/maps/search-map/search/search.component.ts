@@ -1,28 +1,27 @@
 import { Component, ElementRef, EventEmitter, NgZone, OnInit, Output, ViewChild } from '@angular/core';
-import { MapsAPILoader } from '@agm/core';
-import { Location } from '../entity/Location';
 
+import { Location } from '../entity/Location';
+import { MapsAPILoader } from '@agm/core';
 
 @Component({
   selector: 'ngx-search',
-  templateUrl: './search.component.html',
+// tslint:disable-next-line:trailing-comma
+  templateUrl: './search.component.html'
 })
 export class SearchComponent implements OnInit {
-
   @Output() positionChanged = new EventEmitter<Location>();
 
   @ViewChild('search')
   public searchElementRef: ElementRef;
 
-  constructor(private mapsAPILoader: MapsAPILoader,
-              private ngZone: NgZone) {
-  }
+  constructor(private mapsAPILoader: MapsAPILoader, private ngZone: NgZone) {}
 
   ngOnInit() {
     // load Places Autocomplete
     this.mapsAPILoader.load().then(() => {
       const autocomplete = new google.maps.places.Autocomplete(this.searchElementRef.nativeElement, {
-        types: ['address'],
+        // tslint:disable-next-line:trailing-comma
+        types: ['address']
       });
       autocomplete.addListener('place_changed', () => {
         this.ngZone.run(() => {
@@ -34,9 +33,7 @@ export class SearchComponent implements OnInit {
             return;
           }
 
-          this.positionChanged.emit(
-            new Location(place.geometry.location.lat(),
-              place.geometry.location.lng()));
+          this.positionChanged.emit(new Location(place.geometry.location.lat(), place.geometry.location.lng()));
         });
       });
     });
