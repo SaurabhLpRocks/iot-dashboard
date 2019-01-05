@@ -19,7 +19,9 @@
     "start": "npm run build && node build/src/index.js",
     "setup": "npm install",
     "test": "gulp test",
-    "watch": "nodemon --watch build/src build/src/index.js"
+    "watch": "nodemon --watch build/src build/src/index.js",
+    "lint": "tslint -c tslint.json /**/*.ts",
+    "lint-fix": "tslint -c tslint.json /**/*.ts --fix"
   },
   "dependencies": {
     "bcryptjs": "2.4.3",
