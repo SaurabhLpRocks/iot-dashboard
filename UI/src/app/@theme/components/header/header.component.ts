@@ -9,7 +9,7 @@ import { UserService } from '../../../@core/data/users.service';
 @Component({
   selector: 'ngx-header',
   styleUrls: ['./header.component.scss'],
-  templateUrl: './header.component.html'
+  templateUrl: './header.component.html',
 })
 export class HeaderComponent implements OnInit {
   @Input() position = 'normal';
@@ -29,7 +29,6 @@ export class HeaderComponent implements OnInit {
       if (token.isValid()) {
         // here we receive a payload from the token and assigne it to our `user` variable
         this.user = token.getPayload();
- console.log("this.user  ", this.user );
       }
     });
   }

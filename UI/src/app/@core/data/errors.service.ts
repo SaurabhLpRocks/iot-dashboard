@@ -5,9 +5,9 @@ import * as StackTraceGPS from 'stacktrace-gps';
 import * as StackTraceParser from 'error-stack-parser';
 import * as moment from 'moment';
 
-import { ErrorHandler, Injectable, Injector } from '@angular/core';
+import { Injectable, Injector } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
+import { LocationStrategy, PathLocationStrategy } from '@angular/common';
 
 import { HelperService } from '../../shared/services/helper.service';
 import { NbTokenLocalStorage } from '@nebular/auth';
@@ -21,7 +21,7 @@ import merge from 'lodash/merge';
 export class ErrorsService {
   constructor(private injector: Injector, private http: HttpClient, private localStorage: NbTokenLocalStorage) {}
 
-  async log(error:Error) {
+  async log(error: Error) {
     const parsedStackInfo = await this.parseErrorStack(error);
     const errorToSend = this.addContextInfo(error, parsedStackInfo);
     console.log('errorToSend ', errorToSend);
@@ -33,7 +33,7 @@ export class ErrorsService {
     return this.http.post(appApiResources.error, errorToSend).toPromise();
   }
 
-  addContextInfo(error:Error, parsedStackInfo) {
+  addContextInfo(error: Error, parsedStackInfo) {
     // All the context details that you want (usually coming from other services; Constants, UserService...)
     const errorName: string = error.name || null;
     const appId: string = '';
@@ -57,7 +57,7 @@ export class ErrorsService {
       message,
       stackFrames,
       parsedStackInfo,
-      originalErrorStack: JSON.stringify(error.stack)
+      originalErrorStack: JSON.stringify(error.stack),
     };
   }
 

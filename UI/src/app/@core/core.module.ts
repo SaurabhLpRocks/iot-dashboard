@@ -2,10 +2,8 @@ import { ErrorHandler, ModuleWithProviders, NgModule, Optional, SkipSelf } from 
 import {
   NbAuthJWTToken,
   NbAuthModule,
-  NbDummyAuthStrategy,
   NbPasswordAuthStrategy,
   NbTokenLocalStorage,
-  NbTokenStorage
 } from '@nebular/auth';
 import { NbRoleProvider, NbSecurityModule } from '@nebular/security';
 import { SnotifyModule, SnotifyService, ToastDefaults } from 'ng-snotify';
@@ -26,18 +24,18 @@ const socialLinks = [
   {
     url: 'https://github.com/akveo/nebular',
     target: '_blank',
-    icon: 'socicon-github'
+    icon: 'socicon-github',
   },
   {
     url: 'https://www.facebook.com/akveo/',
     target: '_blank',
-    icon: 'socicon-facebook'
+    icon: 'socicon-facebook',
   },
   {
     url: 'https://twitter.com/akveo_inc',
     target: '_blank',
-    icon: 'socicon-twitter'
-  }
+    icon: 'socicon-twitter',
+  },
 ];
 
 export class NbSimpleRoleProvider extends NbRoleProvider {
@@ -52,10 +50,10 @@ const formSetting: any = {
   strategy: 'email',
   showMessages: {
     success: true,
-    error: true
+    error: true,
   },
   terms: true,
-  socialLinks: socialLinks
+  socialLinks: socialLinks,
 };
 
 export const NB_CORE_PROVIDERS = [
@@ -67,61 +65,61 @@ export const NB_CORE_PROVIDERS = [
         baseEndpoint: 'http://localhost:5000',
         token: {
           class: NbAuthJWTToken,
-          key: 'token' // this parameter tells where to look for the token
+          key: 'token', // this parameter tells where to look for the token
         },
         login: {
           // ...
           endpoint: '/users/login',
-          method: 'post'
+          method: 'post',
         },
         register: {
           // ...
           endpoint: '/users',
-          method: 'post'
-        }
-      })
+          method: 'post',
+        },
+      }),
     ],
     forms: {
       login: formSetting,
-      register: formSetting
-    }
+      register: formSetting,
+    },
   }).providers,
 
   NbSecurityModule.forRoot({
     accessControl: {
       guest: {
-        view: '*'
+        view: '*',
       },
       user: {
         parent: 'guest',
         create: '*',
         edit: '*',
-        remove: '*'
-      }
-    }
+        remove: '*',
+      },
+    },
   }).providers,
 
   {
     provide: NbRoleProvider,
-    useClass: NbSimpleRoleProvider
+    useClass: NbSimpleRoleProvider,
   },
   NbTokenLocalStorage,
   AnalyticsService,
   AuthGuard,
   {
     provide: ErrorHandler,
-    useClass: ErrorsHandler
+    useClass: ErrorsHandler,
   },
   ErrorsService,
   HttpErrorHandlerService,
-  ToastNotificationService
+  ToastNotificationService,
 ];
 
 @NgModule({
   imports: [CommonModule],
   exports: [NbAuthModule],
   declarations: [],
-  providers: [httpInterceptorProviders]
+  providers: [httpInterceptorProviders],
 })
 export class CoreModule {
   constructor(@Optional() @SkipSelf() parentModule: CoreModule) {
@@ -131,7 +129,7 @@ export class CoreModule {
   static forRoot(): ModuleWithProviders {
     return <ModuleWithProviders>{
       ngModule: CoreModule,
-      providers: [...NB_CORE_PROVIDERS]
+      providers: [...NB_CORE_PROVIDERS],
     };
   }
 }

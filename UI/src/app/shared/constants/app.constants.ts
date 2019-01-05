@@ -9,7 +9,7 @@ export const appVariables = {
     getActionName: 'Read',
     addActionName: 'Create',
     updateActionName: 'Update',
-    deleteActionName: 'Delete'
+    deleteActionName: 'Delete',
   },
   defaultAvatarUrl: 'default_user',
   defaultDdlOptionValue: '-1',
@@ -28,6 +28,6 @@ export const appVariables = {
   },
   defaultServerError: {
     error: 'Server Error!',
-    message: 'Unknown error occured! Please try again.'
-  }
+    message: 'Unknown error occured! Please try again.',
+  },
 };

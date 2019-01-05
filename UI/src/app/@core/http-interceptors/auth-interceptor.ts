@@ -5,7 +5,7 @@ import {
   HttpHeaders,
   HttpInterceptor,
   HttpRequest,
-  HttpResponse
+  HttpResponse,
 } from '@angular/common/http';
 import { finalize, tap } from 'rxjs/operators';
 
@@ -33,7 +33,7 @@ export class AuthInterceptor implements HttpInterceptor {
         // Succeeds when there is a response; ignore other events
         event => (successResponse = event instanceof HttpResponse ? event : null),
         // Operation failed; error is an HttpErrorResponse
-        error => (errorResponse = error instanceof HttpErrorResponse ? error : null)
+        error => (errorResponse = error instanceof HttpErrorResponse ? error : null),
       ),
       // Handle auth errors
       finalize(() => {
@@ -42,7 +42,7 @@ export class AuthInterceptor implements HttpInterceptor {
           this.localStorage.clear();
           window.location.href = '#login';
         }
-      })
+      }),
     );
   }
 }

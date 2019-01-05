@@ -22,8 +22,8 @@ export class ErrorInterceptor implements HttpInterceptor {
           return null;
         },
         // Operation failed; error is an HttpErrorResponse
-        error => this.errorHandler.handleErrorResponse(error)
-      )
+        error => this.errorHandler.handleErrorResponse(error),
+      ),
       // Log when response observable either completes or errors
       //   finalize(() => {
       //     const isErrorResponse = errorResponse instanceof HttpErrorResponse;

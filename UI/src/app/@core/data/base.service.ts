@@ -1,5 +1,5 @@
-import { HttpClient, HttpHeaders, HttpParams, HttpResponse } from '@angular/common/http';
-import { catchError, tap } from 'rxjs/operators';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { catchError } from 'rxjs/operators';
 
 import { HttpErrorHandlerService } from '../utils/http-error-handler.service';
 import { Injectable } from '@angular/core';
@@ -27,7 +27,7 @@ export class BaseService {
       reportProgress?: boolean;
       responseType?: 'json';
       withCredentials?: boolean;
-    }
+    },
   ): Observable<ServerResponse> {
     return this.http
       .get<ServerResponse>(url, options)
@@ -35,7 +35,7 @@ export class BaseService {
       .pipe(
         catchError(error => {
           return this.errorHandler.handleErrorResponse(error);
-        })
+        }),
       );
   }
 
@@ -57,7 +57,7 @@ export class BaseService {
       reportProgress?: boolean;
       responseType: 'arraybuffer';
       withCredentials?: boolean;
-    }
+    },
   ) {
     return this.http.post(url, body, options);
   }

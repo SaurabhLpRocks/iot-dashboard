@@ -13,5 +13,5 @@ function createUrl(actionName: string): string {
     login: createAuthUrl('token'),
     register: createUrl('register'),
     error: createUrl('error'),
-    dashBoard: createUrl('dashboard')
+    dashBoard: createUrl('dashboard'),
   };

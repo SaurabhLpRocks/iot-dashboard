@@ -4,7 +4,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  */
 
-import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { SnotifyModule, SnotifyService, ToastDefaults } from 'ng-snotify';
 
 import { APP_BASE_HREF } from '@angular/common';
@@ -29,12 +29,12 @@ import { ThemeModule } from './@theme/theme.module';
     NgbModule.forRoot(),
     ThemeModule.forRoot(),
     CoreModule.forRoot(),
-    SharedModule.forRoot()
+    SharedModule.forRoot(),
   ],
   bootstrap: [AppComponent],
   providers: [
     { provide: APP_BASE_HREF, useValue: '/' },
-    { provide: 'SnotifyToastConfig', useValue: ToastDefaults }, SnotifyService
-  ]
+    { provide: 'SnotifyToastConfig', useValue: ToastDefaults }, SnotifyService,
+  ],
 })
 export class AppModule {}

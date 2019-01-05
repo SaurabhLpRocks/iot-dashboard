@@ -11,7 +11,7 @@ import { ToastNotificationService } from './toast-notification.service';
 export class ErrorsHandler implements ErrorHandler {
   constructor(
     // Because the ErrorHandler is created before the providers, we’ll have to use the Injector to get them.
-    private injector: Injector
+    private injector: Injector,
   ) {}
 
   handleError(error: Error | HttpErrorResponse) {
@@ -21,7 +21,7 @@ export class ErrorsHandler implements ErrorHandler {
         // Handle offline error
         return this.showToast({
           error: 'Network Error!',
-          message: 'Please check your internet connection and try again.'
+          message: 'Please check your internet connection and try again.',
         });
       }
     } else {
@@ -30,7 +30,7 @@ export class ErrorsHandler implements ErrorHandler {
       return errorsService.log(error).then(errorWithContextInfo => {
         return this.showToast({
           error: 'App crashed!',
-          message: 'Looks like app is not working as it should be, you wil be redirected to the home page.'
+          message: 'Looks like app is not working as it should be, you wil be redirected to the home page.',
         });
       });
     }

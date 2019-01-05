@@ -22,7 +22,7 @@ export class ToastNotificationService implements OnInit {
       showProgressBar: true,
       newTop: true,
       maxAtPosition: 5,
-      maxOnScreen: 5
+      maxOnScreen: 5,
     };
   }
 
@@ -85,7 +85,7 @@ export class ToastNotificationService implements OnInit {
       global: {
         newOnTop: this.toastConfig.newTop,
         maxAtPosition: this.toastConfig.maxAtPosition,
-        maxOnScreen: this.toastConfig.maxOnScreen
+        maxOnScreen: this.toastConfig.maxOnScreen,
       },
       toast: {
         bodyMaxLength: this.toastConfig.bodyMaxLength,
@@ -95,8 +95,8 @@ export class ToastNotificationService implements OnInit {
         timeout: this.toastConfig.timeout,
         showProgressBar: this.toastConfig.showProgressBar,
         closeOnClick: this.toastConfig.closeOnClick,
-        pauseOnHover: this.toastConfig.pauseOnHover
-      }
+        pauseOnHover: this.toastConfig.pauseOnHover,
+      },
     };
 
     this.snotifyService.setDefaults(defaults);
@@ -145,7 +145,7 @@ export class ToastNotificationService implements OnInit {
       // })
       Observable.create(observer => {
         observer.next({
-          body: 'Processing...'
+          body: 'Processing...',
         });
         observable.subscribe(
           (success: any) => observer.complete(),
@@ -155,9 +155,9 @@ export class ToastNotificationService implements OnInit {
               observer.complete();
               this.snotifyService.remove(toast.id);
             }, 1000);
-          }
+          },
         );
-      })
+      }),
     );
   }
 
@@ -180,7 +180,7 @@ export class ToastNotificationService implements OnInit {
               observer.next();
               this.snotifyService.remove(toast.id);
             },
-            bold: false
+            bold: false,
           },
           // tslint:disable-next-line:max-line-length
           // tslint:disable-next-line:no-console
@@ -190,9 +190,9 @@ export class ToastNotificationService implements OnInit {
               observer.error();
               this.snotifyService.remove(toast.id);
             },
-            bold: true
-          }
-        ]
+            bold: true,
+          },
+        ],
       });
     });
   }
@@ -219,10 +219,10 @@ export class ToastNotificationService implements OnInit {
             // tslint:disable-next-line:no-console
             console.log(`Said No: ${text}`);
             this.snotifyService.remove(toast.id);
-          }
-        }
+          },
+        },
       ],
-      placeholder: 'This is the example placeholder which you can pass' // Max-length = 40
+      placeholder: 'This is the example placeholder which you can pass', // Max-length = 40
     });
   }
 

@@ -45,7 +45,7 @@ export class HttpErrorHandlerService {
       if (typeof error === 'object') {
         return {
           error: error.error || appVariables.defaultServerError.error,
-          message: error.message || appVariables.defaultServerError.message
+          message: error.message || appVariables.defaultServerError.message,
         };
       }
     } catch (ex) {
@@ -57,7 +57,7 @@ export class HttpErrorHandlerService {
   private parseCustomServerError = (error: ServerResponse) => ({
     error: error.error && !error.warning ? error.error : appVariables.defaultServerError.error,
     warning: error.warning ? error.warning : null,
-    message: error.message || appVariables.defaultServerError.message
+    message: error.message || appVariables.defaultServerError.message,
   })
 
   private showToast(parsedError: NgxError): void {

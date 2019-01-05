@@ -23,7 +23,7 @@
     "test": "ng test",
     "test:coverage": "rimraf coverage && npm run test -- --code-coverage",
     "lint": "ng lint",
-    "lint:fix": "ng lint ngx-admin-demo --fix",
+    "lint:fix": "ng lint ngx-admin-demo --fix=true",
     "lint:styles": "stylelint ./src/**/*.scss",
     "lint:ci": "npm run lint && npm run lint:styles",
     "pree2e": "webdriver-manager update --standalone false --gecko false",
@@ -121,5 +121,15 @@
     "tslint": "5.7.0",
     "tslint-language-service": "^0.9.9",
     "typescript": "3.1.3"
-  }
+  },
+  "tasks": [
+    {
+        "type": "npm",
+        "script": "lint",
+        "problemMatcher": {
+            "base": "$tslint5",
+            "fileLocation": "relative"
+        }
+    }
+]
 }
