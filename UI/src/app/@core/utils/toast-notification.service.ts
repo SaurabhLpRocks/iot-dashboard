@@ -122,8 +122,6 @@ export class ToastNotificationService implements OnInit {
   onSimple() {
     this.setDefaults();
 
-    // const icon = `assets/custom-svg.svg`;
-    const icon = `https://placehold.it/48x100`;
 
     this.snotifyService.simple(this.toastConfig.title, this.toastConfig.body, this.getToastConfig());
   }
@@ -148,8 +146,8 @@ export class ToastNotificationService implements OnInit {
           body: 'Processing...',
         });
         observable.subscribe(
-          (success: any) => observer.complete(),
-          (error: any) => observer.complete(),
+          () => observer.complete(),
+          () => observer.complete(),
           () => {
             setTimeout(() => {
               observer.complete();

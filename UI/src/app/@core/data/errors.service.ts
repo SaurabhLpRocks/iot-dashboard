@@ -1,19 +1,15 @@
 import 'rxjs/add/observable/of';
 
-import * as StackTrace from 'stacktrace-js';
 import * as StackTraceGPS from 'stacktrace-gps';
 import * as StackTraceParser from 'error-stack-parser';
 import * as moment from 'moment';
 
-import { Injectable, Injector } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { Injectable, Injector } from '@angular/core';
 import { LocationStrategy, PathLocationStrategy } from '@angular/common';
 
-import { HelperService } from '../../shared/services/helper.service';
 import { NbTokenLocalStorage } from '@nebular/auth';
-import { Observable } from 'rxjs';
 import { appApiResources } from '../../shared/constants/api.contants';
-import merge from 'lodash/merge';
 
 // Cool library to deal with errors: https://www.stacktracejs.com
 
@@ -24,7 +20,6 @@ export class ErrorsService {
   async log(error: Error) {
     const parsedStackInfo = await this.parseErrorStack(error);
     const errorToSend = this.addContextInfo(error, parsedStackInfo);
-    console.log('errorToSend ', errorToSend);
 
     // Log the error to the console
     console.error(error);
@@ -70,9 +65,6 @@ export class ErrorsService {
     const parsedStackedFrames: any[] = StackTraceParser.parse(error);
     const stackFrame = parsedStackedFrames[0];
 
-    const errback = _error => {
-      /*console.log('_error',StackTrace.fromError(_error));*/
-    };
 
     /*
      * Better location/name information from source maps with stacktrace-gps
@@ -85,7 +77,6 @@ export class ErrorsService {
     try {
       errorMappedLocation = await gps.getMappedLocation(stackFrame);
     } catch (error) {
-      console.log('error in errorMappedLocation', error);
       errorMappedLocation.isFailedToParse = true;
       errorMappedLocation.parseFailedStack = error.toString();
     }
@@ -93,7 +84,6 @@ export class ErrorsService {
     try {
       errorPinpoint = await gps.pinpoint(stackFrame);
     } catch (error) {
-      console.log('error in errorPinpoint', error);
       errorPinpoint.isFailedToParse = true;
       errorPinpoint.parseFailedStack = error.toString();
     }
@@ -101,7 +91,6 @@ export class ErrorsService {
     try {
       errorFunctionName = await gps.findFunctionName(stackFrame);
     } catch (error) {
-      console.log('error in errorFunctionName', error);
       errorFunctionName.isFailedToParse = true;
       errorFunctionName.parseFailedStack = error.toString();
     }

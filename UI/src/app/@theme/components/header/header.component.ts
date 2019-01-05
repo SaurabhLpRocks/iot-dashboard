@@ -4,7 +4,6 @@ import { NbMenuService, NbSidebarService } from '@nebular/theme';
 
 import { AnalyticsService } from '../../../@core/utils/analytics.service';
 import { LayoutService } from '../../../@core/data/layout.service';
-import { UserService } from '../../../@core/data/users.service';
 
 @Component({
   selector: 'ngx-header',
@@ -22,7 +21,6 @@ export class HeaderComponent implements OnInit {
     private authService: NbAuthService,
     private sidebarService: NbSidebarService,
     private menuService: NbMenuService,
-    private userService: UserService,
     private analyticsService: AnalyticsService,
     private layoutService: LayoutService) {
     this.authService.onTokenChange().subscribe((token: NbAuthJWTToken) => {

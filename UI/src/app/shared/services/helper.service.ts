@@ -57,8 +57,6 @@ export class HelperService {
 
   secondsTicksCounter(): object {
     let seconds: number = 0;
-    // tslint:disable-next-line:prefer-const
-    let interval;
     return {
       start: () => {
         return setInterval(function() {
@@ -132,7 +130,6 @@ export class HelperService {
     compareFromGroup: FormGroup,
     formControl: AbstractControl,
     confirmFormControl: AbstractControl,
-    test: FormGroup,
   ): string {
     if (
       (formControl && formControl.touched) ||
@@ -154,7 +151,6 @@ export class HelperService {
   showCompareCtrlsValidationMsg(
     frmGroup: FormGroup,
     ctrl1: AbstractControl,
-    ctrl2: AbstractControl,
   ): boolean {
     return frmGroup && !frmGroup.valid && (ctrl1.touched || ctrl1.touched)
       ? true
