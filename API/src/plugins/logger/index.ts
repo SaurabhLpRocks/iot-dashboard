@@ -1,5 +1,6 @@
-import { IPlugin } from "../interfaces";
 import * as Hapi from "hapi";
+
+import { IPlugin } from "../interfaces";
 
 const register = async (server: Hapi.Server): Promise<void> => {
   try {
@@ -7,7 +8,7 @@ const register = async (server: Hapi.Server): Promise<void> => {
       plugin: require("good"),
       options: {
         ops: {
-          interval: 1000
+          interval: 1000,
         },
         reporters: {
           consoleReporter: [
@@ -19,17 +20,17 @@ const register = async (server: Hapi.Server): Promise<void> => {
                   error: "*",
                   log: "*",
                   response: "*",
-                  request: "*"
-                }
-              ]
+                  request: "*",
+                },
+              ],
             },
             {
-              module: "good-console"
+              module: "good-console",
             },
-            "stdout"
-          ]
-        }
-      }
+            "stdout",
+          ],
+        },
+      },
     });
   } catch (err) {
     console.log(`Error registering logger plugin: ${err}`);
@@ -42,6 +43,6 @@ export default (): IPlugin => {
     register,
     info: () => {
       return { name: "Good Logger", version: "1.0.0" };
-    }
+    },
   };
 };

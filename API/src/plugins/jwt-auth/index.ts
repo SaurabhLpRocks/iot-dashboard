@@ -1,11 +1,13 @@
-import { IPlugin, IPluginOptions } from "../interfaces";
 import * as Hapi from "hapi";
+
+import { IPlugin, IPluginOptions } from "../interfaces";
 import { IUser, UserModel } from "../../api/users/user";
+
 import { IRequest } from "../../interfaces/request";
 
 const register = async (
   server: Hapi.Server,
-  options: IPluginOptions
+  options: IPluginOptions,
 ): Promise<void> => {
   try {
     const database = options.database;
@@ -14,7 +16,7 @@ const register = async (
     const validateUser = async (
       decoded: any,
       request: IRequest,
-      h: Hapi.ResponseToolkit
+      h: Hapi.ResponseToolkit,
     ) => {
       const user = await database.userModel.findById(decoded.id).lean(true);
       if (!user) {
@@ -28,7 +30,7 @@ const register = async (
 
     return setAuthStrategy(server, {
       config: serverConfig,
-      validate: validateUser
+      validate: validateUser,
     });
   } catch (err) {
     console.log(`Error registering jwt plugin: ${err}`);
@@ -41,8 +43,8 @@ const setAuthStrategy = async (server, { config, validate }) => {
     key: config.jwtSecret,
     validate,
     verifyOptions: {
-      algorithms: ["HS256"]
-    }
+      algorithms: ["HS256"],
+    },
   });
 
   server.auth.default("jwt");
@@ -55,6 +57,6 @@ export default (): IPlugin => {
     register,
     info: () => {
       return { name: "JWT Authentication", version: "1.0.0" };
-    }
+    },
   };
 };

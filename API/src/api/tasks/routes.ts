@@ -10,7 +10,7 @@ import { jwtValidator } from "../users/user-validator";
 export default function (
   server: Hapi.Server,
   configs: IServerConfigurations,
-  database: IDatabase
+  database: IDatabase,
 ) {
   const taskController = new TaskController(configs, database);
   server.bind(taskController);
@@ -25,23 +25,23 @@ export default function (
       description: "Get task by id.",
       validate: {
         params: {
-          id: Joi.string().required()
+          id: Joi.string().required(),
         },
-        headers: jwtValidator
+        headers: jwtValidator,
       },
       plugins: {
         "hapi-swagger": {
           responses: {
             "200": {
-              description: "Task founded."
+              description: "Task founded.",
             },
             "404": {
-              description: "Task does not exists."
-            }
-          }
-        }
-      }
-    }
+              description: "Task does not exists.",
+            },
+          },
+        },
+      },
+    },
   });
 
   server.route({
@@ -55,11 +55,11 @@ export default function (
       validate: {
         query: {
           top: Joi.number().default(5),
-          skip: Joi.number().default(0)
+          skip: Joi.number().default(0),
         },
-        headers: jwtValidator
-      }
-    }
+        headers: jwtValidator,
+      },
+    },
   });
 
   server.route({
@@ -72,23 +72,23 @@ export default function (
       description: "Delete task by id.",
       validate: {
         params: {
-          id: Joi.string().required()
+          id: Joi.string().required(),
         },
-        headers: jwtValidator
+        headers: jwtValidator,
       },
       plugins: {
         "hapi-swagger": {
           responses: {
             "200": {
-              description: "Deleted Task."
+              description: "Deleted Task.",
             },
             "404": {
-              description: "Task does not exists."
-            }
-          }
-        }
-      }
-    }
+              description: "Task does not exists.",
+            },
+          },
+        },
+      },
+    },
   });
 
   server.route({
@@ -101,24 +101,24 @@ export default function (
       description: "Update task by id.",
       validate: {
         params: {
-          id: Joi.string().required()
+          id: Joi.string().required(),
         },
         payload: TaskValidator.updateTaskModel,
-        headers: jwtValidator
+        headers: jwtValidator,
       },
       plugins: {
         "hapi-swagger": {
           responses: {
             "200": {
-              description: "Deleted Task."
+              description: "Deleted Task.",
             },
             "404": {
-              description: "Task does not exists."
-            }
-          }
-        }
-      }
-    }
+              description: "Task does not exists.",
+            },
+          },
+        },
+      },
+    },
   });
 
   server.route({
@@ -131,17 +131,17 @@ export default function (
       description: "Create a task.",
       validate: {
         payload: TaskValidator.createTaskModel,
-        headers: jwtValidator
+        headers: jwtValidator,
       },
       plugins: {
         "hapi-swagger": {
           responses: {
             "201": {
-              description: "Created Task."
-            }
-          }
-        }
-      }
-    }
+              description: "Created Task.",
+            },
+          },
+        },
+      },
+    },
   });
 }

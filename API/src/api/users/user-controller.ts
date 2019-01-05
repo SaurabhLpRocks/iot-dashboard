@@ -24,7 +24,7 @@ export default class UserController {
       id: user._id,
       name: user.name,
       email: user.email,
-      picture: `https://ui-avatars.com/api/?background=0D8ABC&color=fff&name=${user.name}`
+      picture: `https://ui-avatars.com/api/?background=0D8ABC&color=fff&name=${user.name}`,
     };
 
     return Jwt.sign(payload, jwtSecret, { expiresIn: jwtExpiration });
@@ -44,7 +44,7 @@ export default class UserController {
     }
 
     return {
-      token: this.generateToken(user)
+      token: this.generateToken(user),
     };
   }
 
@@ -64,7 +64,7 @@ export default class UserController {
       let user: IUser = await this.database.userModel.findByIdAndUpdate(
         id,
         { $set: request.payload },
-        { new: true }
+        { new: true },
       );
       return user;
     } catch (error) {

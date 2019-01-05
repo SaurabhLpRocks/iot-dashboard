@@ -39,7 +39,7 @@ export default class TaskController {
       let task: ITask = await this.database.taskModel.findByIdAndUpdate(
         { _id, userId }, //ES6 shorthand syntax
         { $set: request.payload },
-        { new: true }
+        { new: true },
       );
 
       if (task) {
@@ -58,7 +58,7 @@ export default class TaskController {
 
     let deletedTask = await this.database.taskModel.findOneAndRemove({
       _id: id,
-      userId: userId
+      userId: userId,
     });
 
     if (deletedTask) {

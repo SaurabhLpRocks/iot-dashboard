@@ -1,5 +1,6 @@
-import { IPlugin, IPluginInfo } from "../interfaces";
 import * as Hapi from "hapi";
+
+import { IPlugin, IPluginInfo } from "../interfaces";
 
 const register = async (server: Hapi.Server): Promise<void> => {
   try {
@@ -12,23 +13,23 @@ const register = async (server: Hapi.Server): Promise<void> => {
           info: {
             title: "Task Api",
             description: "Task Api Documentation",
-            version: "1.0"
+            version: "1.0",
           },
           tags: [
             {
               name: "tasks",
-              description: "Api tasks interface."
+              description: "Api tasks interface.",
             },
             {
               name: "users",
-              description: "Api users interface."
-            }
+              description: "Api users interface.",
+            },
           ],
           swaggerUI: true,
           documentationPage: true,
-          documentationPath: "/docs"
-        }
-      }
+          documentationPath: "/docs",
+        },
+      },
     ]);
   } catch (err) {
     console.log(`Error registering swagger plugin: ${err}`);
@@ -40,6 +41,6 @@ export default (): IPlugin => {
     register,
     info: () => {
       return { name: "Swagger Documentation", version: "1.0.0" };
-    }
+    },
   };
 };

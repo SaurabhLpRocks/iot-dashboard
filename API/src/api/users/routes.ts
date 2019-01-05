@@ -10,7 +10,7 @@ import { UserModel } from "./user";
 export default function(
   server: Hapi.Server,
   serverConfigs: IServerConfigurations,
-  database: IDatabase
+  database: IDatabase,
 ) {
   const userController = new UserController(serverConfigs, database);
   server.bind(userController);
@@ -24,21 +24,21 @@ export default function(
       tags: ["api", "users"],
       description: "Get user info.",
       validate: {
-        headers: UserValidator.jwtValidator
+        headers: UserValidator.jwtValidator,
       },
       plugins: {
         "hapi-swagger": {
           responses: {
             "200": {
-              description: "User founded."
+              description: "User founded.",
             },
             "401": {
-              description: "Please login."
-            }
-          }
-        }
-      }
-    }
+              description: "Please login.",
+            },
+          },
+        },
+      },
+    },
   });
 
   server.route({
@@ -50,21 +50,21 @@ export default function(
       tags: ["api", "users"],
       description: "Delete current user.",
       validate: {
-        headers: UserValidator.jwtValidator
+        headers: UserValidator.jwtValidator,
       },
       plugins: {
         "hapi-swagger": {
           responses: {
             "200": {
-              description: "User deleted."
+              description: "User deleted.",
             },
             "401": {
-              description: "User does not have authorization."
-            }
-          }
-        }
-      }
-    }
+              description: "User does not have authorization.",
+            },
+          },
+        },
+      },
+    },
   });
 
   server.route({
@@ -77,21 +77,21 @@ export default function(
       description: "Update current user info.",
       validate: {
         payload: UserValidator.updateUserModel,
-        headers: UserValidator.jwtValidator
+        headers: UserValidator.jwtValidator,
       },
       plugins: {
         "hapi-swagger": {
           responses: {
             "200": {
-              description: "Updated info."
+              description: "Updated info.",
             },
             "401": {
-              description: "User does not have authorization."
-            }
-          }
-        }
-      }
-    }
+              description: "User does not have authorization.",
+            },
+          },
+        },
+      },
+    },
   });
 
   server.route({
@@ -103,18 +103,18 @@ export default function(
       tags: ["api", "users"],
       description: "Create a user.",
       validate: {
-        payload: UserValidator.createUserModel
+        payload: UserValidator.createUserModel,
       },
       plugins: {
         "hapi-swagger": {
           responses: {
             "201": {
-              description: "User created."
-            }
-          }
-        }
-      }
-    }
+              description: "User created.",
+            },
+          },
+        },
+      },
+    },
   });
 
   server.route({
@@ -126,17 +126,17 @@ export default function(
       tags: ["api", "users"],
       description: "Login a user.",
       validate: {
-        payload: UserValidator.loginUserModel
+        payload: UserValidator.loginUserModel,
       },
       plugins: {
         "hapi-swagger": {
           responses: {
             "200": {
-              description: "User logged in."
-            }
-          }
-        }
-      }
-    }
+              description: "User logged in.",
+            },
+          },
+        },
+      },
+    },
   });
 }

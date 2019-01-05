@@ -1,15 +1,16 @@
-import * as Hapi from "hapi";
 import * as Boom from "boom";
-import { IPlugin } from "./plugins/interfaces";
-import { IServerConfigurations } from "./configurations";
+import * as Hapi from "hapi";
 import * as Logs from "./plugins/logging";
 import * as Tasks from "./api/tasks";
 import * as Users from "./api/users";
+
 import { IDatabase } from "./database";
+import { IPlugin } from "./plugins/interfaces";
+import { IServerConfigurations } from "./configurations";
 
 export async function init(
   configs: IServerConfigurations,
-  database: IDatabase
+  database: IDatabase,
 ): Promise<Hapi.Server> {
   try {
     const port = process.env.PORT || configs.port;
@@ -18,9 +19,9 @@ export async function init(
       port: port,
       routes: {
         cors: {
-          origin: ["*"]
-        }
-      }
+          origin: ["*"],
+        },
+      },
     });
 
     if (configs.routePrefix) {
@@ -31,7 +32,7 @@ export async function init(
     const plugins: Array<string> = configs.plugins;
     const pluginOptions = {
       database: database,
-      serverConfigs: configs
+      serverConfigs: configs,
     };
 
     let pluginPromises: Promise<any>[] = [];
@@ -39,7 +40,7 @@ export async function init(
     plugins.forEach((pluginName: string) => {
       var plugin: IPlugin = require("./plugins/" + pluginName).default();
       console.log(
-        `Register Plugin ${plugin.info().name} v${plugin.info().version}`
+        `Register Plugin ${plugin.info().name} v${plugin.info().version}`,
       );
       pluginPromises.push(plugin.register(server, pluginOptions));
     });
