@@ -1,5 +1,12 @@
 {
     "rules": {
+        "trailing-comma": [
+            true,
+            {
+              "multiline": "always",
+              "singleline": "never"
+            }
+          ],
         "class-name": true,
         "curly": true,
         "eofline": false,

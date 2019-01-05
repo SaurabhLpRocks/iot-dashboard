@@ -1,6 +1,7 @@
 import {Component, OnDestroy} from '@angular/core';
+
 import { NbThemeService } from '@nebular/theme';
-import { takeWhile } from 'rxjs/operators/takeWhile' ;
+import { takeWhile } from 'rxjs/operators' ;
 
 interface CardSettings {
   title: string;

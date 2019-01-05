@@ -1,10 +1,11 @@
 import * as Hapi from "hapi";
 import * as Joi from "joi";
-import UserController from "./user-controller";
-import { UserModel } from "./user";
 import * as UserValidator from "./user-validator";
+
 import { IDatabase } from "../../database";
 import { IServerConfigurations } from "../../configurations";
+import UserController from "./user-controller";
+import { UserModel } from "./user";
 
 export default function(
   server: Hapi.Server,
@@ -95,7 +96,7 @@ export default function(
 
   server.route({
     method: "POST",
-    path: "/users",
+    path: "/users/register",
     options: {
       handler: userController.createUser,
       auth: false,

@@ -1,10 +1,12 @@
-import * as Hapi from "hapi";
-import * as Boom from "boom";
-import * as Jwt from "jsonwebtoken";
-import { IUser } from "./user";
-import { IDatabase } from "../../database";
-import { IServerConfigurations } from "../../configurations";
-import { IRequest, ILoginRequest } from "../../interfaces/request";
+import * as Boom from 'boom';
+import * as Hapi from 'hapi';
+import * as Jwt from 'jsonwebtoken';
+
+import { ILoginRequest, IRequest } from '../../interfaces/request';
+
+import { IDatabase } from '../../database';
+import { IServerConfigurations } from '../../configurations';
+import { IUser } from './user';
 
 export default class UserController {
   private database: IDatabase;
@@ -18,7 +20,12 @@ export default class UserController {
   private generateToken(user: IUser) {
     const jwtSecret = this.configs.jwtSecret;
     const jwtExpiration = this.configs.jwtExpiration;
-    const payload = { id: user._id };
+    const payload = {
+      id: user._id,
+      name: user.name,
+      email: user.email,
+      picture: `https://ui-avatars.com/api/?background=0D8ABC&color=fff&name=${user.name}`
+    };
 
     return Jwt.sign(payload, jwtSecret, { expiresIn: jwtExpiration });
   }
@@ -29,14 +36,16 @@ export default class UserController {
     let user: IUser = await this.database.userModel.findOne({ email: email });
 
     if (!user) {
-      return Boom.unauthorized("User does not exists.");
+      return Boom.unauthorized('User does not exists.');
     }
 
     if (!user.validatePassword(password)) {
-      return Boom.unauthorized("Password is invalid.");
+      return Boom.unauthorized('Password is invalid.');
     }
 
-    return { token: this.generateToken(user) };
+    return {
+      token: this.generateToken(user)
+    };
   }
 
   public async createUser(request: IRequest, h: Hapi.ResponseToolkit) {

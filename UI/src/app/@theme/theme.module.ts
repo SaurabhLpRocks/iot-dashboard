@@ -1,54 +1,63 @@
-import { ModuleWithProviders, NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-
-import {
-  NbActionsModule,
-  NbCardModule,
-  NbLayoutModule,
-  NbMenuModule,
-  NbRouteTabsetModule,
-  NbSearchModule,
-  NbSidebarModule,
-  NbTabsetModule,
-  NbThemeModule,
-  NbUserModule,
-  NbCheckboxModule,
-  NbPopoverModule,
-  NbContextMenuModule,
-  NbProgressBarModule,
-} from '@nebular/theme';
-
-import { NbSecurityModule } from '@nebular/security';
-
 import {
   FooterComponent,
   HeaderComponent,
-  SearchInputComponent,
-  ThemeSettingsComponent,
-  SwitcherComponent,
   LayoutDirectionSwitcherComponent,
+  SearchInputComponent,
+  SwitcherComponent,
+  ThemeSettingsComponent,
   ThemeSwitcherComponent,
-  TinyMCEComponent,
   ThemeSwitcherListComponent,
+  TinyMCEComponent,
 } from './components';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ModuleWithProviders, NgModule } from '@angular/core';
 import {
-  CapitalizePipe,
-  PluralPipe,
-  RoundPipe,
-  TimingPipe,
-  NumberWithCommasPipe,
-} from './pipes';
+  NbAccordionModule,
+  NbActionsModule,
+  NbAlertModule,
+  NbButtonModule,
+  NbCalendarKitModule,
+  NbCalendarModule,
+  NbCalendarRangeModule,
+  NbCardModule,
+  NbChatModule,
+  NbCheckboxModule,
+  NbContextMenuModule,
+  NbDatepickerModule,
+  NbDialogModule,
+  NbInputModule,
+  NbLayoutModule,
+  NbListModule,
+  NbMenuModule,
+  NbPopoverModule,
+  NbProgressBarModule,
+  NbRadioModule,
+  NbRouteTabsetModule,
+  NbSearchModule,
+  NbSelectModule,
+  NbSidebarModule,
+  NbSpinnerModule,
+  NbStepperModule,
+  NbTabsetModule,
+  NbThemeModule,
+  NbToastrModule,
+  NbTooltipModule,
+  NbUserModule,
+  NbWindowModule,
+} from '@nebular/theme';
 import {
   OneColumnLayoutComponent,
   SampleLayoutComponent,
   ThreeColumnsLayoutComponent,
   TwoColumnsLayoutComponent,
 } from './layouts';
-import { DEFAULT_THEME } from './styles/theme.default';
-import { COSMIC_THEME } from './styles/theme.cosmic';
+
 import { CORPORATE_THEME } from './styles/theme.corporate';
+import { COSMIC_THEME } from './styles/theme.cosmic';
+import { CommonModule } from '@angular/common';
+import { DEFAULT_THEME } from './styles/theme.default';
+import { NbSecurityModule } from '@nebular/security';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 const BASE_MODULES = [CommonModule, FormsModule, ReactiveFormsModule];
 
@@ -68,6 +77,24 @@ const NB_MODULES = [
   NgbModule,
   NbSecurityModule, // *nbIsGranted directive,
   NbProgressBarModule,
+  NbCalendarModule,
+  NbCalendarRangeModule,
+  NbStepperModule,
+  NbButtonModule,
+  NbListModule,
+  NbToastrModule,
+  NbInputModule,
+  NbAccordionModule,
+  NbDatepickerModule,
+  NbDialogModule,
+  NbWindowModule,
+  NbAlertModule,
+  NbSpinnerModule,
+  NbRadioModule,
+  NbSelectModule,
+  NbChatModule,
+  NbTooltipModule,
+  NbCalendarKitModule,
 ];
 
 const COMPONENTS = [
@@ -90,14 +117,6 @@ const ENTRY_COMPONENTS = [
   ThemeSwitcherListComponent,
 ];
 
-const PIPES = [
-  CapitalizePipe,
-  PluralPipe,
-  RoundPipe,
-  TimingPipe,
-  NumberWithCommasPipe,
-];
-
 const NB_THEME_PROVIDERS = [
   ...NbThemeModule.forRoot(
     {
@@ -107,12 +126,19 @@ const NB_THEME_PROVIDERS = [
   ).providers,
   ...NbSidebarModule.forRoot().providers,
   ...NbMenuModule.forRoot().providers,
+  ...NbDatepickerModule.forRoot().providers,
+  ...NbDialogModule.forRoot().providers,
+  ...NbWindowModule.forRoot().providers,
+  ...NbToastrModule.forRoot().providers,
+  ...NbChatModule.forRoot({
+    messageGoogleMapKey: 'AIzaSyA_wNuCzia92MAmdLRzmqitRGvCF7wCZPY',
+  }).providers,
 ];
 
 @NgModule({
   imports: [...BASE_MODULES, ...NB_MODULES],
-  exports: [...BASE_MODULES, ...NB_MODULES, ...COMPONENTS, ...PIPES],
-  declarations: [...COMPONENTS, ...PIPES],
+  exports: [...BASE_MODULES, ...NB_MODULES, ...COMPONENTS],
+  declarations: [...COMPONENTS],
   entryComponents: [...ENTRY_COMPONENTS],
 })
 export class ThemeModule {

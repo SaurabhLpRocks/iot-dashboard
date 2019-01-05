@@ -1,13 +1,14 @@
-import * as Hapi from "hapi";
-import * as Boom from "boom";
-import { ITask } from "./task";
-import { IDatabase } from "../../database";
-import { IServerConfigurations } from "../../configurations";
-import { IRequest } from "../../interfaces/request";
-import { ILogging } from "../../plugins/logging/logging";
+import * as Boom from 'boom';
+import * as Hapi from 'hapi';
+import * as Helper from '../../utils/helper';
+
+import { IDatabase } from '../../database';
+import { ILogging } from '../../plugins/logging/logging';
+import { IRequest } from '../../interfaces/request';
+import { IServerConfigurations } from '../../configurations';
+import { ITask } from './task';
 
 //Custom helper module
-import * as Helper from "../../utils/helper";
 
 export default class TaskController {
   private database: IDatabase;
@@ -32,7 +33,7 @@ export default class TaskController {
 
   public async updateTask(request: IRequest, h: Hapi.ResponseToolkit) {
     let userId = request.auth.credentials.id;
-    let _id = request.params["id"];
+    let _id = request.params['id'];
 
     try {
       let task: ITask = await this.database.taskModel.findByIdAndUpdate(
@@ -52,8 +53,8 @@ export default class TaskController {
   }
 
   public async deleteTask(request: IRequest, h: Hapi.ResponseToolkit) {
-    let id = request.params["id"];
-    let userId = request["auth"]["credentials"];
+    let id = request.params['id'];
+    let userId = request['auth']['credentials'];
 
     let deletedTask = await this.database.taskModel.findOneAndRemove({
       _id: id,
@@ -69,10 +70,9 @@ export default class TaskController {
 
   public async getTaskById(request: IRequest, h: Hapi.ResponseToolkit) {
     let userId = request.auth.credentials.id;
-    let _id = request.params["id"];
+    let _id = request.params['id'];
 
-    let task = await this.database.taskModel.findOne({ _id, userId })
-      .lean(true);
+    let task = await this.database.taskModel.findOne({ _id, userId }).lean(true);
 
     if (task) {
       return task;
@@ -83,14 +83,18 @@ export default class TaskController {
 
   public async getTasks(request: IRequest, h: Hapi.ResponseToolkit) {
     let userId = request.auth.credentials.id;
-    let top = request.query["top"];
-    let skip = request.query["skip"];
+    let top = request.query['top'];
+    let skip = request.query['skip'];
     let tasks = await this.database.taskModel
       .find({ userId: userId })
       .lean(true)
       .skip(skip)
       .limit(top);
-
+    return Boom.expectationFailed('Sorry! Unable to retrieve the task at the moment.');
+    // return {
+    //   error:'error title',
+    //   message: 'error message'
+    // };
     return tasks;
   }
 }
