@@ -70,9 +70,9 @@ export class ErrorsService {
      * Better location/name information from source maps with stacktrace-gps
      * More Info: https://www.stacktracejs.com/#!/docs/stacktrace-gps
      */
-    let errorMappedLocation: ParsedClientErrorStack,
-      errorPinpoint: ParsedClientErrorStack,
-      errorFunctionName: ParsedClientErrorStack;
+    let errorMappedLocation: ParsedClientErrorStack = <any>{};
+    let errorPinpoint: ParsedClientErrorStack = <any>{};
+    let errorFunctionName: ParsedClientErrorStack = <any>{};
     const gps = new StackTraceGPS();
     try {
       errorMappedLocation = await gps.getMappedLocation(stackFrame);

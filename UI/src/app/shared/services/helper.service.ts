@@ -1,7 +1,6 @@
 import { AbstractControl, FormGroup } from '@angular/forms';
 
 import { Injectable } from '@angular/core';
-import { SlimLoadingBarService } from 'ng2-slim-loading-bar';
 import { User } from '../interfaces/user.interface';
 import { appVariables } from '../constants/app.constants';
 import { environment } from '../../../environments';
@@ -18,7 +17,7 @@ export class HelperService {
   tickerInstance: any = null;
   env: string;
   // resourceActionAccessMap: ResourceActionAccess[];
-  constructor(public slimLoadingBarService: SlimLoadingBarService) {
+  constructor() {
     this.env = environment.env;
   }
 
@@ -203,16 +202,16 @@ export class HelperService {
   startLoader(delay?: number): void {
     delay = delay || typeof delay === 'number' ? delay : 0;
     setTimeout(() => {
-      this.slimLoadingBarService.start(() => {
-        // Loading Completed;
-      });
+      // this.slimLoadingBarService.start(() => {
+      //   // Loading Completed;
+      // });
     }, delay);
   }
 
   stopLoader(delay?: number): void {
     delay = delay || typeof delay === 'number' ? delay : 0;
     setTimeout(() => {
-      this.slimLoadingBarService.complete();
+      // this.slimLoadingBarService.complete();
     }, delay);
   }
 
